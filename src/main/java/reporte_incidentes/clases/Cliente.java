@@ -4,5 +4,11 @@ import lombok.*;
 
 @Getter @Setter
 public class Cliente {
-	//TODO
+	private int id_cliente;
+	private String nombre; 
+	private String apellido;
+	private String email;
+	private String cuit;
+	private String razon_Social;
+	
 }
