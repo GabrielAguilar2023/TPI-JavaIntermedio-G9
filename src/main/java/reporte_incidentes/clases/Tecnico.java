@@ -4,5 +4,7 @@ import lombok.*;
 
 @Getter @Setter
 public class Tecnico {
-	//TODO
+	private int id_Tecnico;
+	private String nombre;
+	private String apellido;
 }
