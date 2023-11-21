@@ -17,6 +17,8 @@ public class Area_Comercial {
 													));
 		*/
 		
+		
+		
 		ClienteControlador clientetrolador = new ClienteControlador();
 		System.out.println(clientetrolador.CrearCliente());
 		//clientetrolador.listadoCliente();

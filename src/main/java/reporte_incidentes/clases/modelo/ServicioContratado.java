@@ -2,11 +2,19 @@ package reporte_incidentes.clases.modelo;
 
 import java.util.List;
 
+import jakarta.persistence.*;
 import lombok.*;
-@Getter @Setter
 
+@Getter @Setter
+@Entity
+@Table (name="ServiciosContratados")
 public class ServicioContratado {
-private int idServicio;
-private String nombreServicio;
-private List <Problema> incidentesCubiertos;
+
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//Hace al Id autoincremental y único
+	private int idServicioContratado;
+	@Column (name="NombreServicio", length = 50)
+	private String nombreServicio;
+	
+	@OneToMany(mappedBy = "servicioContratado")
+	private List <Problema> incidentesCubiertos;
 }

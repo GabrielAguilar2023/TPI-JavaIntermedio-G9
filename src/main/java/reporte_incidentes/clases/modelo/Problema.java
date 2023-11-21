@@ -14,4 +14,8 @@ public class Problema {
 	private String nombre;
 	@Column (name="Tiempo")
 	private int tiempo; //tiempo en horas
+	
+	@ManyToOne
+	@JoinColumn(name="idServicoContratado")
+	private ServicioContratado servicioContratado;
 }

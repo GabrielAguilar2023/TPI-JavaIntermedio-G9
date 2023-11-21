@@ -14,8 +14,8 @@ public class Cliente {
 	
 	private String borrar;
 	
-	//	private PersonaCliente personaCliente;
-//	private List<ServicioContratado> servicioContratado;
+//	private PersonaCliente personaCliente;
+//	private List<Contrato> contratos;
 	
 /*public String toString() {
 	

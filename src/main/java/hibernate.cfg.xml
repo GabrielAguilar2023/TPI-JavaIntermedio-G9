@@ -13,5 +13,7 @@
   <property name="hibernate.hbm2ddl.auto">create</property>
   <mapping class="reporte_incidentes.clases.modelo.Cliente"/>
   <mapping class="reporte_incidentes.clases.modelo.Problema"/>
+  <mapping class="reporte_incidentes.clases.modelo.ServicioContratado"/>
+  
  </session-factory>
 </hibernate-configuration>
