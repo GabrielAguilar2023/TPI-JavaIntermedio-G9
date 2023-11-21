@@ -11,9 +11,12 @@ import lombok.*;
 public class Contrato {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//Hace al Id autoincremental y único
 	private int idContrato;
-//	Cliente cliente;
+
 	@ManyToOne
 	@JoinColumn(name="idServicioContratado", nullable = false)
 	ServicioContratado servicioContratado;	
 
+	@ManyToOne
+	@JoinColumn(name="idCliente", nullable = false)
+	Cliente cliente;
 }

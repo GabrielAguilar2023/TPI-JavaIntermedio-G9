@@ -14,8 +14,13 @@ public class Cliente {
 	
 	private String borrar;
 	
-//	private PersonaCliente personaCliente;
-//	private List<Contrato> contratos;
+@OneToOne
+@JoinColumn(name="idPersonaCliente")
+	private PersonaCliente personaCliente;
+
+
+@OneToMany (mappedBy = "cliente")
+	private List<Contrato> contratos;
 	
 /*public String toString() {
 	
