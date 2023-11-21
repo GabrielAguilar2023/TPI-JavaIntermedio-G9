@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter @Setter
 @Entity
-@Table(name="Problemas")
+@Table(name = "Problemas")
 public class Problema {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//Hace al Id autoincremental y único
 	private int idProblema;
@@ -16,6 +16,6 @@ public class Problema {
 	private int tiempo; //tiempo en horas
 	
 	@ManyToOne
-	@JoinColumn(name="idServicoContratado")
+	@JoinColumn(name = "idServicoContratado", nullable = false)
 	private ServicioContratado servicioContratado;
 }

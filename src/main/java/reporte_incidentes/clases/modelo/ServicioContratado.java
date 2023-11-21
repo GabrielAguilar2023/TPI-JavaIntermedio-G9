@@ -17,4 +17,7 @@ public class ServicioContratado {
 	
 	@OneToMany(mappedBy = "servicioContratado")
 	private List <Problema> incidentesCubiertos;
+	
+	@OneToMany(mappedBy = "servicioContratado")
+	private List<Contrato> contratos;
 }
