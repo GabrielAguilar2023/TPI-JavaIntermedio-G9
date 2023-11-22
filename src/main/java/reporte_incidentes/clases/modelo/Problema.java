@@ -18,4 +18,9 @@ public class Problema {
 	@ManyToOne
 	@JoinColumn(name = "idServicoContratado", nullable = false)
 	private ServicioContratado servicioContratado;
+	
+	@ManyToOne
+	@JoinColumn(name = "idIncidente", nullable = false)
+	private Incidente incidente;
+
 }

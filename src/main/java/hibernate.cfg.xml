@@ -16,6 +16,6 @@
   <mapping class="reporte_incidentes.clases.modelo.ServicioContratado"/>
   <mapping class="reporte_incidentes.clases.modelo.Contrato"/>
   <mapping class="reporte_incidentes.clases.modelo.PersonaCliente"/>
-   
+  <mapping class="reporte_incidentes.clases.modelo.Incidente"/> 
  </session-factory>
 </hibernate-configuration>

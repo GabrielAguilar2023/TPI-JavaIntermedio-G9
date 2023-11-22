@@ -19,4 +19,7 @@ public class Contrato {
 	@ManyToOne
 	@JoinColumn(name="idCliente", nullable = false)
 	Cliente cliente;
+	
+	@OneToMany (mappedBy="servicioConProblema")
+	private List<Incidente> incidentes;
 }
