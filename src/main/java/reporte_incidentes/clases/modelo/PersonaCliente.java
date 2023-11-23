@@ -10,14 +10,14 @@ import lombok.Setter;
 @Entity @Table (name="PersonasCliente")
 public class PersonaCliente {
 	@Id @GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int idPersona;
+	private int idPersonaCliente;
 	private String razonSocial;
 	private String direccion;
 	private String telefono;
 	
-	@OneToOne (mappedBy = "personaCliente")
+	@OneToOne
+	@JoinColumn(name="IdCliente")
 	private Cliente cliente;
-	
 
 	public String toString(){
 		return this.razonSocial +" "+this.direccion+" "+ this.telefono +" ";

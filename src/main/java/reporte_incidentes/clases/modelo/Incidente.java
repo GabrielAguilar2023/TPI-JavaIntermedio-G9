@@ -20,8 +20,10 @@ public class Incidente {
 //	private Date fecha;
 	private String descripcionProblema;
 	
-
-//	private Tecnico tecnico;
+	@ManyToOne
+	@JoinColumn(name="idTecnico")
+	private Tecnico tecnico;
+	
 	private String fechaSolucion;
 	
 	@Column(columnDefinition = "BIT(1) NOT NULL DEFAULT FALSE")

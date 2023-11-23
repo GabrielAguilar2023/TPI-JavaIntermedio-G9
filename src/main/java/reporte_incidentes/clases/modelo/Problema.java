@@ -22,5 +22,10 @@ public class Problema {
 	@ManyToOne
 	@JoinColumn(name = "idIncidente", nullable = false)
 	private Incidente incidente;
+	
+	@ManyToOne
+	@JoinColumn(name = "idEspecialidad", nullable = false)
+	private Especialidad especialidad;
+	
 
 }

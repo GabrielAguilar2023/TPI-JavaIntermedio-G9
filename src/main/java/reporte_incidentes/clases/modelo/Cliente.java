@@ -11,19 +11,15 @@ import lombok.*;
 public class Cliente {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//Hace al Id autoincremental y único
 	private int id_cliente;
-	
-	private String borrar;
-	
-@OneToOne
-@JoinColumn(name="idPersonaCliente")
+		
+	@OneToOne(mappedBy = "cliente")
 	private PersonaCliente personaCliente;
-
-
-@OneToMany (mappedBy = "cliente")
+	
+	@OneToMany (mappedBy = "cliente")
 	private List<Contrato> contratos;
 	
-/*public String toString() {
+public String toString() {
 	
 	return personaCliente.toString() + " "; // TODO Agregar listado de servicios contratados  
-}*/
+}
 }
