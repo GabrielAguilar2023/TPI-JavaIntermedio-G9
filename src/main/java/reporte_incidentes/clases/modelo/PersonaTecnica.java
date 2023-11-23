@@ -20,5 +20,13 @@ public class PersonaTecnica {
 	@OneToOne
 	@JoinColumn(name="idTecnico")
 	private Tecnico tecnico;
+
+	@Override
+	public String toString() {
+		return "PersonaTecnica [idPersonaTecnica=" + idPersonaTecnica + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", numeroDocumento=" + numeroDocumento + ", direccion=" + direccion + ", telefono=" + telefono
+				+ ", tecnico=" + tecnico + "]";
+	}
+	
 	
 }
