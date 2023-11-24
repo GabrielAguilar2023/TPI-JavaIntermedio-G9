@@ -3,10 +3,11 @@ package reporte_incidentes.clases.modelo;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
-@Entity
+@Getter @Setter @NoArgsConstructor
+@Entity 
 @Table(name="PersonasTecnicas")
 public class PersonaTecnica {
 	@Id @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -26,6 +27,15 @@ public class PersonaTecnica {
 		return "PersonaTecnica [idPersonaTecnica=" + idPersonaTecnica + ", nombre=" + nombre + ", apellido=" + apellido
 				+ ", numeroDocumento=" + numeroDocumento + ", direccion=" + direccion + ", telefono=" + telefono
 				+ ", tecnico=" + tecnico + "]";
+	}
+
+	public PersonaTecnica(String nombre, String apellido, String numeroDocumento, String direccion, String telefono) {
+	
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.numeroDocumento = numeroDocumento;
+		this.direccion = direccion;
+		this.telefono = telefono;
 	}
 	
 	

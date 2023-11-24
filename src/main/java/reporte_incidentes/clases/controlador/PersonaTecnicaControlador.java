@@ -9,38 +9,24 @@ import org.hibernate.cfg.Configuration;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
-import reporte_incidentes.clases.modelo.Cliente;
 import reporte_incidentes.clases.modelo.PersonaTecnica;
 
 public class PersonaTecnicaControlador {
 	private SessionFactory sesionAbierta;	
 	private Session sesion;
-	
-	
-	public void iniciarSesion () {
-		sesionAbierta= (SessionFactory) new Configuration().configure().addAnnotatedClass(PersonaTecnica.class).buildSessionFactory();
-		 this.sesion = sesionAbierta.openSession();
 		
-	}
 
 	
-//-----------------------ALTA--------------------------	
+//--------------ALTA--------------------	
 	public String crearPersonaTecnica(String nombre, String apellido,String documento, String direccion, String telefono){
-		
-		SessionFactory sessionFactory = (SessionFactory) new Configuration().configure().addAnnotatedClass(PersonaTecnica.class).buildSessionFactory();
-		Session session = sessionFactory.openSession();
+		iniciarSesion ();
 	try {
-		PersonaTecnica persona = new PersonaTecnica();
-		persona.setNombre(nombre);
-		persona.setApellido(apellido);
-		persona.setNumeroDocumento(documento);
-		persona.setDireccion(direccion);
-		persona.setTelefono(telefono);
-		
-		session.beginTransaction();
-		session.persist(persona);
-		session.getTransaction().commit();
-		sessionFactory.close();
+		PersonaTecnica persona = new PersonaTecnica(nombre,apellido,documento,direccion,telefono);
+
+		sesion.beginTransaction();
+		sesion.persist(persona);
+		sesion.getTransaction().commit();
+		cerrarSesion();
 		return "Persona Técnica agregada satisfactoriamente\n-------------\n";
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -50,41 +36,35 @@ public class PersonaTecnicaControlador {
 	
 //-----------------BAJA-------------------
 	public String eliminarPersonaTecnica(int id){
-		SessionFactory sessionFactory = (SessionFactory) new Configuration().configure().
-				addAnnotatedClass(PersonaTecnica.class).buildSessionFactory();
-		Session session = sessionFactory.openSession();
+		iniciarSesion();
 	try {	
-		session.beginTransaction();
-		PersonaTecnica persona = session.get(PersonaTecnica.class, id);
-		session.remove(persona);
-		session.getTransaction().commit();
-		sessionFactory.close();
+		sesion.beginTransaction();
+		PersonaTecnica persona = sesion.get(PersonaTecnica.class, id);
+		sesion.remove(persona);
+		sesion.getTransaction().commit();
+		cerrarSesion();
 		return "Cliente removido satisfactoriamente\n-------------\n";
 	} catch (Exception e) {
 		e.printStackTrace();
 	}	
 		return "Error al intentar eliminar el cliente en la base de datos";
 	}
-	
-	
+		
 	//-------------------MODIFICACION----------------------
 	public String modificarPersonaTecnica(int id,String nombre, String apellido,String documento, String direccion, String telefono){
-		SessionFactory sessionFactory = (SessionFactory) new Configuration().configure().
-				addAnnotatedClass(Cliente.class).buildSessionFactory();
-		Session session = sessionFactory.openSession();
+		iniciarSesion();
 	try {	
-		session.beginTransaction();
-		PersonaTecnica persona = session.get(PersonaTecnica.class, id);
+		sesion.beginTransaction();
+		PersonaTecnica persona = sesion.get(PersonaTecnica.class, id);
 		persona.setNombre(nombre);
 		persona.setApellido(apellido);
 		persona.setNumeroDocumento(documento);
 		persona.setDireccion(direccion);
 		persona.setTelefono(telefono);
 
-		
-		session.persist(persona);
-		session.getTransaction().commit();
-		sessionFactory.close();
+		sesion.persist(persona);
+		sesion.getTransaction().commit();
+		cerrarSesion();
 		return "Cliente ID "+id+" actualizado satisfactoriamente\n-------------\n";
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -100,7 +80,7 @@ public class PersonaTecnicaControlador {
 		PersonaTecnica persona = sesion.get(PersonaTecnica.class, id);
 
 		sesion.getTransaction().commit();
-		sesionAbierta.close();
+		cerrarSesion();
 		return "Cliente ID "+id+" "+ persona.toString();
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -109,39 +89,42 @@ public class PersonaTecnicaControlador {
 	}
 
 //-----------------FILTRADO------------------
-	public String fitrarPersonaTecnica(){
-		
+	public void fitrarPersonaTecnica(String campo, String valor){		
 	iniciarSesion();
 	try {
 		sesion.beginTransaction();
-		CriteriaBuilder cb = sesion.getCriteriaBuilder();
-		
+		CriteriaBuilder cb = sesion.getCriteriaBuilder();		
 		CriteriaQuery<PersonaTecnica> cq = cb.createQuery(PersonaTecnica.class);
+		// SELECT * FROM PersonaTecnica
 		Root<PersonaTecnica> root = cq.from(PersonaTecnica.class); 
-		cq.select(root).where(cb.equal(root.get("nombre"), "Gabriel"));
+		
+		//WHERE campo = "valorBuscado"
+		cq.select(root).where(cb.equal(root.get(campo), valor));
 				
 		List<PersonaTecnica>tecnicos = sesion.createQuery(cq).getResultList();
 		System.out.println("");
 		System.out.println("------------ Listado de Técnicos---------------");
-		System.out.println("");
-		
+		System.out.println("");	
 		for(PersonaTecnica p:tecnicos) {
 			System.out.println(p.getIdPersonaTecnica()+" "+ p.getNombre()+ " " + p.getApellido());
 		}
 		System.out.println("-----------------------------------------------");	
-		sesionAbierta.close();
-		return "Listo";
+		cerrarSesion();	
 		
 	} catch (Exception e) {
-		// TODO: handle exception
-	return "Error";
+		e.printStackTrace();
 	}
-	
 	}
-	
-	
-	
 
+	public void iniciarSesion () {
+		sesionAbierta= (SessionFactory) new Configuration().configure().addAnnotatedClass(PersonaTecnica.class).buildSessionFactory();
+		this.sesion = sesionAbierta.openSession();
+	}
+	
+	public void cerrarSesion () {
+		sesion.close();
+		sesionAbierta.close();
+	}
 }
 
 

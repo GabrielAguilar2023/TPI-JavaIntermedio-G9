@@ -8,16 +8,12 @@ public class Area_Comercial {
 	public static void main(String[] args) {
 		System.out.println("Funcionalidad desde Area Comercial");		
 		PersonaTecnicaControlador persona1 = new PersonaTecnicaControlador();
-
 		
 		//------------ALTA------------------
-//		persona2.crearPersonaTecnica("Jorge","Contreras","65456654","25 de Mayo 423","514-645665");
-		
-		
+		persona1.crearPersonaTecnica("Miguel","Galvan","65456654","Sol de Mayo 423","514-645665");	
 
 		//--------------BAJA----------------
-//		persona1.eliminarPersonaTecnica(indicar numero de registro a eliminar);
-
+//		persona1.eliminarPersonaTecnica(id del objeto a eliminar);
 
 		
 		//-------------MODIFICACION---------	
@@ -26,12 +22,12 @@ public class Area_Comercial {
 
 		
 		//------------LECTURA---------------
-//		System.out.println(persona1.leerPersonaTecnica(5));
+//		System.out.println(persona1.leerPersonaTecnica(9));
 		
 		//------------LISTADO---------------
 		
-		var a = persona1.fitrarPersonaTecnica();
-		System.out.println(a);	
+		persona1.fitrarPersonaTecnica("apellido","Fernandez");
+			
 		
 	}
 }
