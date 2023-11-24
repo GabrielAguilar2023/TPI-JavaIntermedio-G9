@@ -5,21 +5,26 @@ import java.util.List;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter @Setter
+@Getter @Setter @ToString @NoArgsConstructor
 @Entity
 @Table (name="Clientes")
 public class Cliente {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//Hace al Id autoincremental y único
 	private int id_cliente;
-		
-	@OneToOne(mappedBy = "cliente")
-	private PersonaCliente personaCliente;
+
+	private String razonSocial;
+	private String direccion;
+	private String telefono;
+			
+//	@OneToMany (mappedBy = "cliente")
+//	private List<Contrato> contratos;
+
+	public Cliente(String razonSocial, String direccion, String telefono) {
+		super();
+		this.razonSocial = razonSocial;
+		this.direccion = direccion;
+		this.telefono = telefono;
+	}
 	
-	@OneToMany (mappedBy = "cliente")
-	private List<Contrato> contratos;
-	
-public String toString() {
-	
-	return personaCliente.toString() + " "; // TODO Agregar listado de servicios contratados  
-}
+
 }
