@@ -6,8 +6,7 @@ import reporte_incidentes.clases.controlador.PersonaTecnicaControlador;
 public class Area_Comercial {
 
 	public static void main(String[] args) {
-		System.out.println("Funcionalidad desde Area Comercial");
-		
+		System.out.println("Funcionalidad desde Area Comercial");		
 		PersonaTecnicaControlador persona1 = new PersonaTecnicaControlador();
 
 		
@@ -27,12 +26,12 @@ public class Area_Comercial {
 
 		
 		//------------LECTURA---------------
-		System.out.println(persona1.leerPersonaTecnica(5));
+//		System.out.println(persona1.leerPersonaTecnica(5));
 		
 		//------------LISTADO---------------
-//		var a = persona1.listadoPersonaTecnica();
-//		System.out.println(a);
 		
+		var a = persona1.fitrarPersonaTecnica();
+		System.out.println(a);	
 		
 	}
 }
