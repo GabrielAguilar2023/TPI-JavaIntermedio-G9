@@ -16,11 +16,10 @@ public class Cliente {
 	private String direccion;
 	private String telefono;
 			
-//	@OneToMany (mappedBy = "cliente")
-//	private List<Contrato> contratos;
+	@OneToMany (mappedBy = "cliente")
+	private List<Contrato> contratos;
 
 	public Cliente(String razonSocial, String direccion, String telefono) {
-		super();
 		this.razonSocial = razonSocial;
 		this.direccion = direccion;
 		this.telefono = telefono;
