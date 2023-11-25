@@ -10,7 +10,7 @@ import lombok.*;
 @Table (name="Clientes")
 public class Cliente {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//Hace al Id autoincremental y único
-	private int id_cliente;
+	private int idCliente;
 
 	private String razonSocial;
 	private String direccion;
