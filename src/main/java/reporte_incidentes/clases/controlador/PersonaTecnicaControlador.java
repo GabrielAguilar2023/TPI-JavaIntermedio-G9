@@ -14,8 +14,6 @@ import reporte_incidentes.clases.modelo.PersonaTecnica;
 public class PersonaTecnicaControlador {
 	private SessionFactory sesionAbierta;	
 	private Session sesion;
-		
-
 	
 //--------------ALTA--------------------	
 	public String crearPersonaTecnica(String nombre, String apellido,String documento, String direccion, String telefono){

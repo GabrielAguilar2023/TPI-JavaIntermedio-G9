@@ -8,6 +8,6 @@ public class Area_Comercial {
 		System.out.println("Funcionalidad desde Area Comercial");
 		
 		ClienteControlador cliente1 = new ClienteControlador();
-		System.out.println( cliente1.crearCliente("Mariano Max", "Belgrano 3256", "45353876"));	
+		System.out.println( cliente1.crearCliente("Tiendas VESTA", "Bedoya 879", "45353655"));	
 	}
 }
