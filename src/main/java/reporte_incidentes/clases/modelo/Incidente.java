@@ -25,7 +25,7 @@ public class Incidente {
 	@Column(columnDefinition = "BIT(1) NOT NULL DEFAULT FALSE")
 	private boolean resuelto;
 
-	
+
 	@ManyToOne
 	@JoinColumn(name="idTecnico")
 	private Tecnico tecnico;
@@ -51,9 +51,12 @@ public class Incidente {
 	}
 
 	public Long calularTiempoResolucion() {
+		if (resuelto) {
 			Long diferencia = this.fechaSolucionReal.getTime() - this.fechaInicioTramite.getTime();
 			TimeUnit unidad = TimeUnit.HOURS;
 			return unidad.convert(diferencia,TimeUnit.MILLISECONDS);
+		}
+		return null;
 	}
 
 }
