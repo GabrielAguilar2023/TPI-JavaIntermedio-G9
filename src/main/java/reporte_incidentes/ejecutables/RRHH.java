@@ -1,6 +1,10 @@
 package reporte_incidentes.ejecutables;
 
+import java.util.List;
+
 import reporte_incidentes.clases.controlador.TecnicoControlador;
+import reporte_incidentes.clases.modelo.Especialidad;
+import reporte_incidentes.clases.modelo.Tecnico;
 
 public class RRHH 
 {
@@ -21,11 +25,26 @@ public class RRHH
 //    		persona1.modificarTecnico(1,"Miguel","Altamirano","65456654","27 de Abril 443","514-645665","eMail");
     		
     		//------------LECTURA---------------
-//    		System.out.println(persona1.leerTecnico(1).getNombre());
+
+//    		Tecnico a = persona1.leerTecnico(1);
+    		
+//    		System.out.println(a.getNombre()+ " " );
+    		
+//    		a.getEspecialidades().stream().forEach(e->System.out.println( e.getNombre()));
+    		
+    		
+    		
+//    		a.getIncidentes().stream().forEach(e->System.out.println( e.calularTiempoResolucion()+ " HS "));
+    		
+    		
+    	//	for(Especialidad e:a.getEspecialidades()){
+    	//		System.out.println(e.getNombre());
+    	//	}
+    		
     		
     		//------------LISTADO---------------
     		
-    		persona1.fitrarTecnico("apellido","Flores");
+//    		persona1.fitrarTecnico("apellido","Flores");
     			
     	
     }

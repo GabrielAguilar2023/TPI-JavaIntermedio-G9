@@ -21,10 +21,10 @@ public class Tecnico {
 	private String direccion;
 	private String telefono;
 
-	@OneToMany (mappedBy = "tecnico")
+	@OneToMany (mappedBy = "tecnico",fetch = FetchType.EAGER)
 	private List<Especialidad> especialidades;
 	
-	@OneToMany(mappedBy = "tecnico")
+	@OneToMany(mappedBy = "tecnico", fetch = FetchType.EAGER)
 	List<Incidente> incidentes;
 	
  	private String tipoNotificacion;
