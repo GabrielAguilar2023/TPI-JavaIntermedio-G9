@@ -18,6 +18,5 @@
   <mapping class="reporte_incidentes.clases.modelo.Incidente"/>
   <mapping class="reporte_incidentes.clases.modelo.Especialidad"/>
   <mapping class="reporte_incidentes.clases.modelo.Tecnico"/>
-  <mapping class="reporte_incidentes.clases.modelo.PersonaTecnica"/>  
  </session-factory>
 </hibernate-configuration>

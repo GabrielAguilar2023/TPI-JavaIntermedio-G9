@@ -32,20 +32,11 @@ public class Mesa_de_Ayuda {
 		
 //		Incidente ObjIncidente = incidente.crearIncidente(fechaInicio,"Incidente 1",fechaSolucionEstimada,fechaSolucionReal ,"Todo termino OK");		
 		Incidente ObjIncidente = incidente.leerIncidente(1);	
-		
-		
-		System.out.println(	ObjIncidente.calularTiempoResolucion() + " Hs.");
-	
-	
-	
-	
-	
-	}
-
-			
-
 				
+		System.out.println(	ObjIncidente.calularTiempoResolucion() + " Hs.");
+		
 	}
+}
 
 
 
