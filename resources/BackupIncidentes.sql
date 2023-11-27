@@ -121,7 +121,7 @@ CREATE TABLE `incidentes` (
   KEY `FKfifn6j8sst9lecnx6d40eywrm` (`idTecnico`),
   CONSTRAINT `FK8w9pprnndrtxy9gqpt805qdte` FOREIGN KEY (`idContrato`) REFERENCES `contratos` (`idContrato`),
   CONSTRAINT `FKfifn6j8sst9lecnx6d40eywrm` FOREIGN KEY (`idTecnico`) REFERENCES `tecnicos` (`idTecnico`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +130,7 @@ CREATE TABLE `incidentes` (
 
 LOCK TABLES `incidentes` WRITE;
 /*!40000 ALTER TABLE `incidentes` DISABLE KEYS */;
-INSERT INTO `incidentes` VALUES (1,'Incidente 1','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-25 22:23:10.000000','Todo termino OK',_binary '',1,1),(2,'Incidente 2','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-27 22:23:10.000000','Sin novedades',_binary '',2,1),(3,'Incidente 3','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-25 16:23:10.000000','Todo bien',_binary '',1,3),(4,'incidente anterior','2023-02-24 22:23:10.000000','2023-02-27 22:23:10.000000','2023-02-25 16:23:10.000000','Sin novedades',_binary '',2,3);
+INSERT INTO `incidentes` VALUES (1,'Incidente 1','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-25 22:23:10.000000','Todo termino OK',_binary '',1,1),(2,'Incidente 2','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-27 22:23:10.000000','Sin novedades',_binary '',2,1),(3,'Incidente 3','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-25 16:23:10.000000','Todo bien',_binary '',1,3),(4,'incidente anterior','2023-02-24 22:23:10.000000','2023-02-27 22:23:10.000000','2023-02-25 16:23:10.000000','Sin novedades',_binary '',2,3),(5,'Incidente 5','2023-10-22 22:23:10.000000','2023-10-25 22:23:10.000000','2023-10-24 22:23:10.000000','Todo termino OK',_binary '',1,3),(6,'Incidente 6','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-25 22:23:10.000000','Todo termino OK',_binary '',1,3),(7,'Incidente 7','2023-11-24 22:23:10.000000','2023-11-27 22:23:10.000000','2023-11-25 22:23:10.000000','Todo termino OK',_binary '',2,1);
 /*!40000 ALTER TABLE `incidentes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,7 +207,7 @@ CREATE TABLE `tecnicos` (
   `telefono` varchar(255) DEFAULT NULL,
   `tipoNotificacion` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idTecnico`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +216,7 @@ CREATE TABLE `tecnicos` (
 
 LOCK TABLES `tecnicos` WRITE;
 /*!40000 ALTER TABLE `tecnicos` DISABLE KEYS */;
-INSERT INTO `tecnicos` VALUES (1,'Altamirano','27 de Abril 443','Miguel','65456654','514-645665','eMail'),(3,'Flores','Amelia Stocklin 5934','Yohana','43544543','514-645665','Whatsapp');
+INSERT INTO `tecnicos` VALUES (1,'Altamirano','27 de Abril 443','Miguel','65456654','514-645665','eMail'),(3,'Flores','Amelia Stocklin 5934','Yohana','43544543','514-645665','Whatsapp'),(4,'Flores','Amelia Stocklin 5934','Yohana','43544543','514-645665','Whatsapp'),(5,'Flores','Amelia Stocklin 5934','Yohana','43544543','514-645665','Whatsapp');
 /*!40000 ALTER TABLE `tecnicos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -229,4 +229,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-26 17:10:29
+-- Dump completed on 2023-11-27  0:38:20
