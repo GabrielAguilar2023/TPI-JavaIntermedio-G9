@@ -6,9 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import jakarta.persistence.criteria.CriteriaQuery;
+
 import reporte_incidentes.clases.modelo.Cliente;
-import reporte_incidentes.clases.modelo.PersonaCliente;
 import reporte_incidentes.clases.modelo.ServicioContratado;
 
 public class ServicioContratadoControlador {
