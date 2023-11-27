@@ -17,8 +17,8 @@ public class IncidenteControlador {
 	private SessionFactory sesionAbierta;	
 	private Session sesion;
 	
-	//--------------ALTA--------------------	
-		public Incidente crearIncidente(Date fechaInicioTramite, String descripcion,Date fechaSolucionEstimada, Date fechaSolucionReal, String informeTecnico){
+//--------------ALTA--------------------	
+	public Incidente crearIncidente(Date fechaInicioTramite, String descripcion,Date fechaSolucionEstimada, Date fechaSolucionReal, String informeTecnico){
 			iniciarSesion ();
 		try {
 			Incidente incidente  = new Incidente (fechaInicioTramite,descripcion,fechaSolucionEstimada,fechaSolucionReal,informeTecnico);
@@ -33,20 +33,20 @@ public class IncidenteControlador {
 			e.printStackTrace();
 		}	
 			return null;
-		}
+	}
 		
-		public void iniciarSesion () {
+	public void iniciarSesion () {
 			sesionAbierta= (SessionFactory) new Configuration().configure().addAnnotatedClass(Incidente.class).buildSessionFactory();
 			this.sesion = sesionAbierta.openSession();
-		}
+	}
 		
-		public void cerrarSesion () {
+	public void cerrarSesion () {
 			sesion.close();
 			sesionAbierta.close();
 		}
 		
-	//---------------LEER-----------------------
-		public Incidente leerIncidente(int id){
+//---------------LEER-----------------------
+	public Incidente leerIncidente(int id){
 			iniciarSesion ();
 		try {
 			sesion.beginTransaction();
@@ -60,8 +60,8 @@ public class IncidenteControlador {
 			return null;
 		}
 
-		//-----------------FILTRADO------------------
-		public void fitrarIncidente(String campo, String valor){		
+//-----------------FILTRADO------------------
+	public void fitrarIncidente(String campo, String valor){		
 		iniciarSesion();
 		try {
 			sesion.beginTransaction();
@@ -86,9 +86,9 @@ public class IncidenteControlador {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 		
-		}
-		
+//---------FILTRADO POR INTERVALO DE FECHAS----------------------
 		public List<Incidente> fitrarIncidente2(Date inicio, Date fin){		
 			iniciarSesion();
 			try {
@@ -103,34 +103,12 @@ public class IncidenteControlador {
 						
 				List<Incidente>lista = sesion.createQuery(cq).getResultList();
 				
-				/*
-				
-				List<Incidente>lista = sesion.createQuery(cq).getResultList();
-							
-				System.out.println(fin);
-				System.out.println(inicio);
-				
-				System.out.println("");
-				System.out.println("------------ Listado de Técnicos --------------");
-				System.out.println("");	
-				for(Incidente i:lista) {
-					System.out.println(i.getIdIncidente()+" - "+ i.getDescripcionProblema()+ " - " + i.getTecnico().getIdTecnico()+ " - " + i.getFechaSolucionReal());
-				}
-				System.out.println("-----------------------------------------------");	
-				
-*/				
 				cerrarSesion();	
 				return lista;
 				
 			} catch (Exception e) {
 				e.printStackTrace();
-				return null;
-				
+				return null;		
 			}
-		}
-		
-		
-		
-		
-	
+		}	
 }

@@ -1,7 +1,5 @@
 package reporte_incidentes.ejecutables;
 
-
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,18 +19,16 @@ public class Mesa_de_Ayuda {
 		
 		// Crear datos de fecha
 		DateFormat formateador = new SimpleDateFormat("dd/M/yy H:m:s");		
-		Date fechaInicio = formateador.parse("24/10/23 22:23:10");
-		Date fechaSolucionEstimada = formateador.parse("27/10/23 22:23:10");
-		Date fechaSolucionReal = formateador.parse("25/10/23 22:23:10");
+		Date fechaInicio = formateador.parse("24/11/23 22:23:10");
+		Date fechaSolucionEstimada = formateador.parse("27/11/23 22:23:10");
+		Date fechaSolucionReal = formateador.parse("25/11/23 22:23:10");
 		
-		// persistir un incidente en la base incidente
+// persistir un incidente en la base de datos
 		IncidenteControlador incidente = new IncidenteControlador();
-		
-		
+				
 		//---------Crear------
 		Incidente ObjIncidente = incidente.crearIncidente(fechaInicio,"Incidente 1",fechaSolucionEstimada,fechaSolucionReal ,"Todo termino OK");		
-
-		
+	
 		//------ Leer ------		
 //		Incidente ObjIncidente = incidente.leerIncidente(1);	
 				
