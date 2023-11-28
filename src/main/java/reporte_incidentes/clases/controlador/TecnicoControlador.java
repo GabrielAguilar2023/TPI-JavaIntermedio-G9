@@ -16,6 +16,8 @@ import reporte_incidentes.clases.modelo.Tecnico;
 
 public class TecnicoControlador {
 	
+	TecnicoDAO tecnicoDAO = new TecnicoDAO();
+	
 	 public static void MasResueltosUltimosNdias(int n) throws ParseException {
 	    	HashMap<Integer,Integer> hash = new HashMap<>();
 	    	List<Incidente> lista = ObtenerListaUltimosNdias(n);
@@ -24,7 +26,7 @@ public class TecnicoControlador {
 	    		int tecnico = i.getTecnico().getIdTecnico();
 	    		if (hash.containsKey(tecnico)) {
 	    			int	valor = hash.get(tecnico);
-	    			hash.put(tecnico, valor+1);
+	    			hash.put(tecnico, valor + 1);
 	    		}
 	    		else {
 	    			hash.put(tecnico,1);
@@ -44,7 +46,7 @@ public class TecnicoControlador {
 	        }
 	        else {	
 	        Tecnico tecnico = winner.leerTecnico(maxEntry.getKey());
-	        System.out.println("El tecnico "+ tecnico.getNombre() + " "+tecnico.getApellido() + " " +
+	        System.out.println("\n\nEl tecnico "+ tecnico.getNombre() + " "+tecnico.getApellido() + " " +
 	        					"tiene " + maxEntry.getValue() + " incidentes resueltos y es el ganador de los últimos " + n +" dias");
 	        }
 			}
@@ -76,7 +78,7 @@ public class TecnicoControlador {
 		 	HashMap<Integer,Integer> hash = new HashMap<>();
 	    	List<Incidente> lista = ObtenerListaUltimosNdias(n);
 	    	
-	    	Optional<Long> menorTiempo = lista.stream().map(e -> e.calularTiempoResolucion()).max(Comparator.comparing(v-> v));
+	    	Optional<Long> menorTiempo = lista.stream().map(e -> e.calularTiempoResolucion()).min(Comparator.comparing(v-> v));
 	    	 Long menor = menorTiempo.get();
 	    	
 	//HashMap almacenando tecnico y cantidad de incidentes solucionados en los n dias.     	
@@ -94,4 +96,18 @@ public class TecnicoControlador {
 	    		}
 			}
 	
+	 public void listaTecnico() {
+		 imprimirListaTecnicos(tecnicoDAO.fitrarTecnico("",""));
+	 }
+	 
+	 private void imprimirListaTecnicos (List<Tecnico> tecnicos) {
+		 
+			System.out.println("");
+			System.out.println("------------ Listado de Técnicos---------------");
+			System.out.println("");	
+			for(Tecnico t:tecnicos) {
+				System.out.println("ID "+t.getIdTecnico() +" --> " +t.getNombre()+ " " + t.getApellido()+ "     "+ t.getDireccion() + " "+ t.getTelefono());
+			}
+			System.out.println("-----------------------------------------------");
+	 }
 }

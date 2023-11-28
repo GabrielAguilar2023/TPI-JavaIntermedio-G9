@@ -94,7 +94,7 @@ public class TecnicoDAO {
 	}
 
 //-----------------FILTRADO------------------
-	public void fitrarTecnico(String campo, String valor){		
+	public List<Tecnico> fitrarTecnico(String campo, String valor){		
 	iniciarSesion();
 	try {
 		sesion.beginTransaction();
@@ -103,22 +103,22 @@ public class TecnicoDAO {
 		// SELECT * FROM PersonaTecnica
 		Root<Tecnico> root = cq.from(Tecnico.class); 
 		
+		
+		if (!campo.isEmpty()&&!valor.isEmpty()){
 		//WHERE campo = "valorBuscado"
 		cq.select(root).where(cb.equal(root.get(campo), valor));
-				
+		}		
+		
+		
 		List<Tecnico>tecnicos = sesion.createQuery(cq).getResultList();
-		System.out.println("");
-		System.out.println("------------ Listado de Técnicos---------------");
-		System.out.println("");	
-		for(Tecnico t:tecnicos) {
-			System.out.println("ID "+t.getIdTecnico() +" --> " +t.getNombre()+ " " + t.getApellido());
-		}
-		System.out.println("-----------------------------------------------");	
+		
 		cerrarSesion();	
+		return tecnicos;
 		
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
+	return null;
 	}
 
 	public void iniciarSesion () {

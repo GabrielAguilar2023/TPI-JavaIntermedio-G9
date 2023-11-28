@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
+import jakarta.persistence.criteria.CriteriaBuilder.Case;
 import reporte_incidentes.clases.controlador.TecnicoControlador;
 import reporte_incidentes.clases.dao.IncidenteDAO;
 import reporte_incidentes.clases.dao.TecnicoDAO;
@@ -18,7 +20,8 @@ public class RRHH {
     public static void main( String[] args ) throws ParseException{
     
     	System.out.println("Funcionalidad desde Recursos Humanos");
-   		TecnicoDAO persona1 = new TecnicoDAO();
+    	
+		TecnicoControlador ranking = new TecnicoControlador();
     		
 //------------ALTA------------------
 //   		persona1.crearTecnico("Yohana","Flores","43544543","Amelia Stocklin 5934","514-645665","Whatsapp");	
@@ -44,18 +47,33 @@ public class RRHH {
     		
 //    		persona1.fitrarTecnico("apellido","Flores");
     		
-    		
-//----------Técnico con mas incidentes resueltos en los últimos N días
-
-    			TecnicoControlador ranking = new TecnicoControlador();
-//    			ranking.MasResueltosUltimosNdias(135);
-    			
-//----------Tecnico que resolvio incidente mas rapido en los ultimos N dias  
-    			
-//    			TecnicoControlador ranking = new TecnicoControlador();
-    			ranking.MasRapidoUltimosNdias(135);
-    			
-    			
+    			System.out.println("\nElija una opcion:\n1 --> Agregar un Técnico\n"
+    					+ "2 --> Quién fue el técnico que más rápido resolvió los incidentes \n"
+    					+ "3 --> Quién fue el técnico con más incidentes resueltos en los últimos N días\n"
+    					+ "4 --> Listado de Técnicos");
+    			Scanner scanner = new Scanner(System.in);
+    			int opcion = scanner.nextInt();
+    			switch (opcion) {
+				case 1: {
+					
+					break;
+				}
+				case 2: {
+					System.out.println("Ingrese el numero de dias a contabilizar");
+					ranking.MasRapidoUltimosNdias(scanner.nextInt());
+					break;
+				}
+				case 3: {
+					System.out.println("Ingrese el numero de dias a contabilizar");
+					ranking.MasResueltosUltimosNdias(scanner.nextInt());
+					break;
+				}
+				case 4: {
+					ranking.listaTecnico();
+					break;
+				}
+				default:
+				System.out.println(opcion + " No es una opcion válida");
+				}
     }
-    
 }
