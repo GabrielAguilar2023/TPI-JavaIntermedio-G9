@@ -1,4 +1,4 @@
-package reporte_incidentes.clases.controlador;
+package reporte_incidentes.clases.dao;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.hibernate.cfg.Configuration;
 import reporte_incidentes.clases.modelo.Cliente;
 import reporte_incidentes.clases.modelo.ServicioContratado;
 
-public class ServicioContratadoControlador {
+public class ServicioContratadoDAO {
 
 	public String CrearServicioContratado(ServicioContratado s){
 		SessionFactory sessionFactory = (SessionFactory) new Configuration().configure().addAnnotatedClass(Cliente.class).buildSessionFactory();

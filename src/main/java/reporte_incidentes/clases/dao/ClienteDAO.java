@@ -1,4 +1,4 @@
-package reporte_incidentes.clases.controlador;
+package reporte_incidentes.clases.dao;
 
 
 
@@ -13,7 +13,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import reporte_incidentes.clases.modelo.Cliente;
 
-public class ClienteControlador {
+public class ClienteDAO {
 	
 	private SessionFactory sesionAbierta;	
 	private Session sesion;

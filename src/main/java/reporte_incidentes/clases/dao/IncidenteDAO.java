@@ -1,4 +1,4 @@
-package reporte_incidentes.clases.controlador;
+package reporte_incidentes.clases.dao;
 
 import java.util.Date;
 import java.util.List;
@@ -13,7 +13,7 @@ import jakarta.persistence.criteria.Root;
 import reporte_incidentes.clases.modelo.Cliente;
 import reporte_incidentes.clases.modelo.Incidente;
 
-public class IncidenteControlador {
+public class IncidenteDAO {
 	private SessionFactory sesionAbierta;	
 	private Session sesion;
 	

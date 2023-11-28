@@ -1,133 +1,97 @@
 package reporte_incidentes.clases.controlador;
 
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
-import reporte_incidentes.clases.modelo.PersonaTecnica;
+import reporte_incidentes.clases.dao.IncidenteDAO;
+import reporte_incidentes.clases.dao.TecnicoDAO;
+import reporte_incidentes.clases.modelo.Incidente;
 import reporte_incidentes.clases.modelo.Tecnico;
 
 public class TecnicoControlador {
-	private SessionFactory sesionAbierta;	
-	private Session sesion;
 	
-//--------------ALTA--------------------	
-	public String crearTecnico(String nombre, String apellido,String documento, String direccion, String telefono,String notificacion){
-		iniciarSesion ();
-	try {
-		Tecnico tecnico = new Tecnico(nombre,apellido,documento,direccion,telefono,notificacion);
+	 public static void MasResueltosUltimosNdias(int n) throws ParseException {
+	    	HashMap<Integer,Integer> hash = new HashMap<>();
+	    	List<Incidente> lista = ObtenerListaUltimosNdias(n);
+	//HashMap almacenando tecnico y cantidad de incidentes solucionados en los n dias.     	
+	    	for (Incidente i : lista) {
+	    		int tecnico = i.getTecnico().getIdTecnico();
+	    		if (hash.containsKey(tecnico)) {
+	    			int	valor = hash.get(tecnico);
+	    			hash.put(tecnico, valor+1);
+	    		}
+	    		else {
+	    			hash.put(tecnico,1);
+	    		}
+			}
+	// Obtener el id del tecnico con mas incidentes solucionados     	
+	    	Map.Entry<Integer,Integer> maxEntry = null;
+	        for (Map.Entry<Integer,Integer> entry : hash.entrySet()) {
+	            if (maxEntry == null || entry.getValue() > maxEntry.getValue()) {
+	                maxEntry = entry;
+	            }
+	        }
 
-		sesion.beginTransaction();
-		sesion.persist(tecnico);
-		sesion.getTransaction().commit();
-		cerrarSesion();
-		return "Técnico agregado satisfactoriamente\n-------------\n";
-	} catch (Exception e) {
-		e.printStackTrace();
-	}	
-		return "Error al intentar agregar el técnico en la base de datos";
-	}
+	        TecnicoDAO winner = new TecnicoDAO();
+	        if (maxEntry == null){
+	        	System.out.println("No hubo incidentes reparados en los ultimos "+ n + " dias!");
+	        }
+	        else {	
+	        Tecnico tecnico = winner.leerTecnico(maxEntry.getKey());
+	        System.out.println("El tecnico "+ tecnico.getNombre() + " "+tecnico.getApellido() + " " +
+	        					"tiene " + maxEntry.getValue() + " incidentes resueltos y es el ganador de los últimos " + n +" dias");
+	        }
+			}
+	    
+	 private static List<Incidente> ObtenerListaUltimosNdias(int n) throws ParseException {
+	    	
+	    	Date finPeriodo = new Date();
+	    	Date inicioPeriodo = sumarRestarHorasFecha(finPeriodo, n * (-24));
+	    	
+	    	IncidenteDAO incidente = new IncidenteDAO();
+	    	List<Incidente> listado = incidente.fitrarIncidente2(inicioPeriodo,finPeriodo);
+	    	listado.stream().forEach(e->System.out.println("Id del Incidente -> "+ e.getIdIncidente()+ " --> "+
+	    			e.getFechaSolucionReal() +
+	    			"-> "+ e.calularTiempoResolucion()+" hs" +" --> Tecnico Nº "+
+	    			e.getTecnico().getIdTecnico() +" ( "+ e.getTecnico().getNombre() + " "+ e.getTecnico().getApellido()+" )"));
+	    	return listado;
+	    
+	    }
+	        	
+	 private static Date sumarRestarHorasFecha(Date fecha, int horas){
+	    	      Calendar calendar = Calendar.getInstance();
+	    	      calendar.setTime(fecha); // Configuramos la fecha que se recibe
+	    	      calendar.add(Calendar.HOUR, horas);  // numero de horas a añadir, o restar en caso de horas<0
+	    	      return calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas	
+	    	 }
+
+	 public void MasRapidoUltimosNdias(int n) throws ParseException {
+		 	Tecnico tecnicoMasRapido;
+		 	HashMap<Integer,Integer> hash = new HashMap<>();
+	    	List<Incidente> lista = ObtenerListaUltimosNdias(n);
+	    	
+	    	Optional<Long> menorTiempo = lista.stream().map(e -> e.calularTiempoResolucion()).max(Comparator.comparing(v-> v));
+	    	 Long menor = menorTiempo.get();
+	    	
+	//HashMap almacenando tecnico y cantidad de incidentes solucionados en los n dias.     	
+	    	for (Incidente i : lista) {
+	    		if (i.calularTiempoResolucion()== menor) {
+	    			System.out.println("\n");
+	    			System.out.println("Técnico más rápido en los últimos "+n+  " resolviendo incidentes fue: "+
+	    								i.getTecnico().getNombre() +" "+i.getTecnico().getApellido() +"\n" +
+	    								"Fue en el incidente N° "+ i.getIdIncidente()+" y tardo "+ menor+" hs."  );
+	    			return;
+	    			
+	    		}
+	    			
+	    		
+	    		}
+			}
 	
-//-----------------BAJA-------------------
-	public String eliminarTecnico(int id){
-		iniciarSesion();
-	try {	
-		sesion.beginTransaction();
-		Tecnico tecnico = sesion.get(Tecnico.class, id);
-		sesion.remove(tecnico);
-		sesion.getTransaction().commit();
-		cerrarSesion();
-		return "Técnico removido satisfactoriamente\n-------------\n";
-	} catch (Exception e) {
-		e.printStackTrace();
-	}	
-		return "Error al intentar eliminar el técnico en la base de datos";
-	}
-		
-	//-------------------MODIFICACION----------------------
-	public String modificarTecnico(int id,String nombre, String apellido,String documento, String direccion, String telefono,String notificacion){
-		iniciarSesion();
-	try {	
-		sesion.beginTransaction();
-		Tecnico tecnico = sesion.get(Tecnico.class, id);
-		tecnico.setNombre(nombre);
-		tecnico.setApellido(apellido);
-		tecnico.setNumeroDocumento(documento);
-		tecnico.setDireccion(direccion);
-		tecnico.setTelefono(telefono);
-		tecnico.setTipoNotificacion(notificacion);
-		
-		
-		
-		
-		
-		
-		sesion.persist(tecnico);
-		sesion.getTransaction().commit();
-		cerrarSesion();
-		return "Técnico ID "+id+" actualizado satisfactoriamente\n-------------\n";
-	} catch (Exception e) {
-		e.printStackTrace();
-	}	
-		return "Error al intentar modificar el técnico en la base de datos";
-	}
-
-//---------------LEER-----------------------
-	public Tecnico leerTecnico(int id){
-		iniciarSesion ();
-	try {	
-		sesion.beginTransaction();
-		Tecnico tecnico = sesion.get(Tecnico.class, id);
-
-		sesion.getTransaction().commit();
-		cerrarSesion();
-		return tecnico;
-	} catch (Exception e) {
-		e.printStackTrace();
-	}	
-		return null;
-	}
-
-//-----------------FILTRADO------------------
-	public void fitrarTecnico(String campo, String valor){		
-	iniciarSesion();
-	try {
-		sesion.beginTransaction();
-		CriteriaBuilder cb = sesion.getCriteriaBuilder();		
-		CriteriaQuery<Tecnico> cq = cb.createQuery(Tecnico.class);
-		// SELECT * FROM PersonaTecnica
-		Root<Tecnico> root = cq.from(Tecnico.class); 
-		
-		//WHERE campo = "valorBuscado"
-		cq.select(root).where(cb.equal(root.get(campo), valor));
-				
-		List<Tecnico>tecnicos = sesion.createQuery(cq).getResultList();
-		System.out.println("");
-		System.out.println("------------ Listado de Técnicos---------------");
-		System.out.println("");	
-		for(Tecnico t:tecnicos) {
-			System.out.println("ID "+t.getIdTecnico() +" --> " +t.getNombre()+ " " + t.getApellido());
-		}
-		System.out.println("-----------------------------------------------");	
-		cerrarSesion();	
-		
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	}
-
-	public void iniciarSesion () {
-		sesionAbierta= (SessionFactory) new Configuration().configure().addAnnotatedClass(Tecnico.class).buildSessionFactory();
-		this.sesion = sesionAbierta.openSession();
-	}
-	
-	public void cerrarSesion () {
-		sesion.close();
-		sesionAbierta.close();
-	}
 }

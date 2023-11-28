@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.hibernate.type.descriptor.java.LocalDateTimeJavaType;
 
-import reporte_incidentes.clases.controlador.IncidenteControlador;
+import reporte_incidentes.clases.dao.IncidenteDAO;
 import reporte_incidentes.clases.modelo.Incidente;
 
 public class Mesa_de_Ayuda {
@@ -24,7 +24,7 @@ public class Mesa_de_Ayuda {
 		Date fechaSolucionReal = formateador.parse("25/11/23 22:23:10");
 		
 // persistir un incidente en la base de datos
-		IncidenteControlador incidente = new IncidenteControlador();
+		IncidenteDAO incidente = new IncidenteDAO();
 				
 		//---------Crear------
 		Incidente ObjIncidente = incidente.crearIncidente(fechaInicio,"Incidente 1",fechaSolucionEstimada,fechaSolucionReal ,"Todo termino OK");		
