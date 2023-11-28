@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import jakarta.persistence.criteria.CriteriaBuilder.Case;
-import reporte_incidentes.clases.controlador.TecnicoControlador;
+import reporte_incidentes.clases.controlador.RRHHControlador;
 import reporte_incidentes.clases.dao.IncidenteDAO;
 import reporte_incidentes.clases.dao.TecnicoDAO;
 import reporte_incidentes.clases.modelo.Especialidad;
@@ -21,59 +21,52 @@ public class RRHH {
     
     	System.out.println("Funcionalidad desde Recursos Humanos");
     	
-		TecnicoControlador ranking = new TecnicoControlador();
+		RRHHControlador tecnicoRRHH = new RRHHControlador();
     		
-//------------ALTA------------------
-//   		persona1.crearTecnico("Yohana","Flores","43544543","Amelia Stocklin 5934","514-645665","Whatsapp");	
-
-//--------------BAJA----------------
-//    		persona1.eliminarTecnico(2);
-  		
-//-------------MODIFICACION---------	
-//    		persona1.modificarTecnico(1,"Miguel","Altamirano","65456654","27 de Abril 443","514-645665","eMail");
+		// persona1.fitrarTecnico("apellido","Flores");
     		
-//------------LECTURA---------------
-/*
-   		Tecnico a = persona1.leerTecnico(1);
-    		
-    		System.out.println("----------- TECNICO --------------");
-    		System.out.println(a.getNombre()+ " " +a.getApellido());
-    		System.out.println("-------- Especialidades-----------");
-    		a.getEspecialidades().stream().forEach(e->System.out.println( e.getNombre()));
-    		System.out.println("---------Ultimos tiempos de resolucion de incidentes");
-    		a.getIncidentes().stream().forEach(e->System.out.println( e.calularTiempoResolucion()+ " HS -> Incidente Nº "+e.getIdIncidente()));    		
-*/    		
-//------------LISTADO---------------
-    		
-//    		persona1.fitrarTecnico("apellido","Flores");
-    		
-    			System.out.println("\nElija una opcion:\n1 --> Agregar un Técnico\n"
+    			System.out.println("\nElija una opcion:\n"
+    					+ "1 --> Agregar un Técnico\n"
     					+ "2 --> Quién fue el técnico que más rápido resolvió los incidentes \n"
     					+ "3 --> Quién fue el técnico con más incidentes resueltos en los últimos N días\n"
-    					+ "4 --> Listado de Técnicos");
+    					+ "4 --> Listado de Técnicos\n"
+    					+ "5 --> Mostrar datos completos de un técnico\n"
+    					+ "6 --> Eliminar un técnico\n"
+    					+ "7 --> Buscar");
+    			
     			Scanner scanner = new Scanner(System.in);
     			int opcion = scanner.nextInt();
     			switch (opcion) {
 				case 1: {
-					
+					tecnicoRRHH.altaDeTecnico();
 					break;
 				}
 				case 2: {
-					System.out.println("Ingrese el numero de dias a contabilizar");
-					ranking.MasRapidoUltimosNdias(scanner.nextInt());
+					tecnicoRRHH.MasRapidoUltimosNdias();
 					break;
 				}
 				case 3: {
-					System.out.println("Ingrese el numero de dias a contabilizar");
-					ranking.MasResueltosUltimosNdias(scanner.nextInt());
+					tecnicoRRHH.MasResueltosUltimosNdias();
 					break;
 				}
 				case 4: {
-					ranking.listaTecnico();
+					tecnicoRRHH.listaTecnico();
+					break;
+				}
+				case 5: {
+					tecnicoRRHH.unTecnico();
+					break;
+				}
+				case 6: {
+					tecnicoRRHH.eliminarTecnico();
+					break;
+				}
+				case 7: {
+					tecnicoRRHH.buscarXcampo();
 					break;
 				}
 				default:
-				System.out.println(opcion + " No es una opcion válida");
+				System.out.println(opcion + "No es una opcion válida");
 				}
     }
 }

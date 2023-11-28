@@ -17,7 +17,7 @@ public class TecnicoDAO {
 	private Session sesion;
 	
 //--------------ALTA--------------------	
-	public String crearTecnico(String nombre, String apellido,String documento, String direccion, String telefono,String notificacion){
+	public Tecnico crearTecnico(String nombre, String apellido,String documento, String direccion, String telefono,String notificacion){
 		iniciarSesion ();
 	try {
 		Tecnico tecnico = new Tecnico(nombre,apellido,documento,direccion,telefono,notificacion);
@@ -25,12 +25,16 @@ public class TecnicoDAO {
 		sesion.beginTransaction();
 		sesion.persist(tecnico);
 		sesion.getTransaction().commit();
+	
 		cerrarSesion();
-		return "Técnico agregado satisfactoriamente\n-------------\n";
+		System.out.println( "Técnico agregado satisfactoriamente\n-------------\n");
+		return tecnico;
 	} catch (Exception e) {
 		e.printStackTrace();
+		System.out.println( "Error al intentar agregar el técnico en la base de datos");
+		return null;
 	}	
-		return "Error al intentar agregar el técnico en la base de datos";
+	
 	}
 	
 //-----------------BAJA-------------------
@@ -61,11 +65,6 @@ public class TecnicoDAO {
 		tecnico.setDireccion(direccion);
 		tecnico.setTelefono(telefono);
 		tecnico.setTipoNotificacion(notificacion);
-		
-		
-		
-		
-		
 		
 		sesion.persist(tecnico);
 		sesion.getTransaction().commit();
@@ -108,17 +107,18 @@ public class TecnicoDAO {
 		//WHERE campo = "valorBuscado"
 		cq.select(root).where(cb.equal(root.get(campo), valor));
 		}		
-		
-		
+				
 		List<Tecnico>tecnicos = sesion.createQuery(cq).getResultList();
 		
 		cerrarSesion();	
 		return tecnicos;
 		
 	} catch (Exception e) {
-		e.printStackTrace();
+		
+		System.out.println("Valor = '" + valor + "' NO ENCONTRADO en la columna '"+campo+"' de la tabla Técnicos");
+		return null;
 	}
-	return null;
+	
 	}
 
 	public void iniciarSesion () {

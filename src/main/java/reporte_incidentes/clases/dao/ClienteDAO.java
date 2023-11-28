@@ -1,7 +1,5 @@
 package reporte_incidentes.clases.dao;
 
-
-
 import java.util.List;
 
 import org.hibernate.Session;
@@ -16,8 +14,7 @@ import reporte_incidentes.clases.modelo.Cliente;
 public class ClienteDAO {
 	
 	private SessionFactory sesionAbierta;	
-	private Session sesion;
-		
+	private Session sesion;		
 	
 //--------------ALTA--------------------	
 	public String crearCliente(String razonSocial,String direccion, String telefono){
@@ -61,7 +58,6 @@ public class ClienteDAO {
 		cliente.setRazonSocial(nombre);
 		cliente.setDireccion(direccion);
 		cliente.setTelefono(telefono);
-		
 
 		sesion.persist(cliente);
 		sesion.getTransaction().commit();

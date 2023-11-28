@@ -7,18 +7,29 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Scanner;
 
+import reporte_incidentes.clases.dao.EspecialidadDAO;
 import reporte_incidentes.clases.dao.IncidenteDAO;
 import reporte_incidentes.clases.dao.TecnicoDAO;
+import reporte_incidentes.clases.modelo.Especialidad;
 import reporte_incidentes.clases.modelo.Incidente;
 import reporte_incidentes.clases.modelo.Tecnico;
 
-public class TecnicoControlador {
+public class RRHHControlador {
 	
-	TecnicoDAO tecnicoDAO = new TecnicoDAO();
+	private TecnicoDAO tecnicoDAO = new TecnicoDAO();
+	private EspecialidadDAO especialidadDAO = new EspecialidadDAO();
+	private static Scanner scan = new Scanner(System.in);
 	
-	 public static void MasResueltosUltimosNdias(int n) throws ParseException {
+	 public static void MasResueltosUltimosNdias() throws ParseException {
+		 
+		 System.out.println("Ingrese el numero de dias a contabilizar");
+			int n = scan.nextInt();
+		 
+		 
 	    	HashMap<Integer,Integer> hash = new HashMap<>();
 	    	List<Incidente> lista = ObtenerListaUltimosNdias(n);
 	//HashMap almacenando tecnico y cantidad de incidentes solucionados en los n dias.     	
@@ -73,7 +84,10 @@ public class TecnicoControlador {
 	    	      return calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas	
 	    	 }
 
-	 public void MasRapidoUltimosNdias(int n) throws ParseException {
+	 public void MasRapidoUltimosNdias() throws ParseException {
+		 System.out.println("Ingrese el numero de dias a contabilizar");
+			int n = scan.nextInt();
+		 
 		 	Tecnico tecnicoMasRapido;
 		 	HashMap<Integer,Integer> hash = new HashMap<>();
 	    	List<Incidente> lista = ObtenerListaUltimosNdias(n);
@@ -101,7 +115,7 @@ public class TecnicoControlador {
 	 }
 	 
 	 private void imprimirListaTecnicos (List<Tecnico> tecnicos) {
-		 
+		if (Objects.isNull(tecnicos)) return;
 			System.out.println("");
 			System.out.println("------------ Listado de Técnicos---------------");
 			System.out.println("");	
@@ -110,4 +124,51 @@ public class TecnicoControlador {
 			}
 			System.out.println("-----------------------------------------------");
 	 }
+
+	 public void unTecnico () {
+		 
+		System.out.println("Ingrese el ID del tecnico a eliminar");
+		int n = scan.nextInt();
+		Tecnico tecnico = tecnicoDAO.leerTecnico(n);
+		
+ 		if (Objects.nonNull(tecnico)) {
+ 		System.out.println("\n----------- TECNICO --------------");
+ 		System.out.println(tecnico.getNombre()+ " " +tecnico.getApellido()+" - Doc N° "+tecnico.getNumeroDocumento()+ " - Direccion: " +tecnico.getDireccion()+ " - Telefono: " +tecnico.getTelefono());
+ 		System.out.println("-------- Especialidades-----------");
+ 		tecnico.getEspecialidades().stream().forEach(e->System.out.println( e.getNombre()));
+ 		System.out.println("---------Tiempos de resolucion de incidentes");
+ 		tecnico.getIncidentes().stream().forEach(e->System.out.println( e.calularTiempoResolucion()+ " HS -> Incidente Nº "+e.getIdIncidente()));
+ 		}
+ 		else
+ 			System.out.println("¡No existe un Tecnico con ese ID en la base de datos!");
+	 }
+
+	 public void altaDeTecnico() {
+// Ingresa datos personales del tecnico.
+		 System.out.println("Ingrese datos del tecnico separados por comas:\nnombre, apellido, documento, direccion, telefono, notificacion");
+		 String datos = scan.nextLine();
+		 String[] lista = datos.split(",");	 
+		 Tecnico tecnico = tecnicoDAO.crearTecnico(lista[0],lista[1],lista[2],lista[3],lista[4],lista[5]);
+// Ingresa especialidad del tecnico.		 
+		 System.out.println("Ingrese Especialidad del Técnico: ");
+		 datos = scan.nextLine(); 		 
+		 especialidadDAO.crearEspecialidad(datos,tecnico);
+		 System.out.println("ID tecnico --> " + tecnico.getIdTecnico());
+		 
+	 }
+
+	 public void eliminarTecnico() {
+		 System.out.println("Ingrese el id del técnico a eliminar");
+			int id = scan.nextInt();
+		 tecnicoDAO.eliminarTecnico(id);		
+	}
+
+	 public void buscarXcampo() {
+		System.out.println("Ingrese campo");
+			String campo = scan.next();
+		System.out.println("Ingrese valor a buscar");
+			String valor = scan.next();
+		imprimirListaTecnicos(tecnicoDAO.fitrarTecnico(campo,valor));			
+	 }
 }
+

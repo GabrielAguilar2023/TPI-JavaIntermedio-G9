@@ -21,12 +21,13 @@ public class Tecnico {
 	private String direccion;
 	private String telefono;
 
-	@OneToMany (mappedBy = "tecnico",fetch = FetchType.EAGER)
+	@OneToMany (mappedBy = "tecnico",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Especialidad> especialidades;
 	
 	@OneToMany(mappedBy = "tecnico", fetch = FetchType.EAGER)
 	List<Incidente> incidentes;
 	
+	@Column(name="TipoNotificacion")
  	private String tipoNotificacion;
 
 	public Tecnico(String nombre, String apellido, String numeroDocumento, String direccion, String telefono,

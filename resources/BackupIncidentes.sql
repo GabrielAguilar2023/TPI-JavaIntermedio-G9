@@ -130,7 +130,7 @@ CREATE TABLE `incidentes` (
 
 LOCK TABLES `incidentes` WRITE;
 /*!40000 ALTER TABLE `incidentes` DISABLE KEYS */;
-INSERT INTO `incidentes` VALUES (1,'Incidente 1','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-25 22:23:10.000000','Todo termino OK',_binary '',1,1),(2,'Incidente 2','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-27 22:23:10.000000','Sin novedades',_binary '',2,1),(3,'Incidente 3','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-25 16:23:10.000000','Todo bien',_binary '',1,3),(4,'incidente anterior','2023-02-24 22:23:10.000000','2023-02-27 22:23:10.000000','2023-02-25 16:23:10.000000','Sin novedades',_binary '',2,3),(5,'Incidente 5','2023-10-22 22:23:10.000000','2023-10-25 22:23:10.000000','2023-10-24 22:23:10.000000','Todo termino OK',_binary '',1,3),(6,'Incidente 6','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-25 22:23:10.000000','Todo termino OK',_binary '',1,3),(7,'Incidente 7','2023-11-24 22:23:10.000000','2023-11-27 22:23:10.000000','2023-11-25 22:23:10.000000','Todo termino OK',_binary '',2,1);
+INSERT INTO `incidentes` VALUES (1,'Incidente 1','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-25 22:23:10.000000','Todo termino OK',_binary '',3,1),(2,'Incidente 2','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-27 22:23:10.000000','Sin novedades',_binary '',3,1),(3,'Incidente 3','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-25 16:23:10.000000','Todo bien',_binary '',3,3),(4,'incidente anterior','2023-02-24 22:23:10.000000','2023-02-27 22:23:10.000000','2023-02-25 16:23:10.000000','Sin novedades',_binary '',2,3),(5,'Incidente 5','2023-10-22 22:23:10.000000','2023-10-25 22:23:10.000000','2023-10-24 22:23:10.000000','Todo termino OK',_binary '',1,3),(6,'Incidente 6','2023-10-24 22:23:10.000000','2023-10-27 22:23:10.000000','2023-10-25 22:23:10.000000','Todo termino OK',_binary '',1,3),(7,'Incidente 7','2023-11-24 22:23:10.000000','2023-11-27 22:23:10.000000','2023-11-25 22:23:10.000000','Todo termino OK',_binary '',2,1);
 /*!40000 ALTER TABLE `incidentes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,7 +155,7 @@ CREATE TABLE `problemas` (
   CONSTRAINT `FKgknnh0mvooc03jxmskhutkxx6` FOREIGN KEY (`idEspecialidad`) REFERENCES `especialidades` (`idEspecialidad`),
   CONSTRAINT `FKln7ugebivgvbh9dsfa0j708hp` FOREIGN KEY (`idServicoContratado`) REFERENCES `servicioscontratados` (`idServicioContratado`),
   CONSTRAINT `FKt4tdn5srkaoihur27uqy6mtve` FOREIGN KEY (`idIncidente`) REFERENCES `incidentes` (`idIncidente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,6 +164,7 @@ CREATE TABLE `problemas` (
 
 LOCK TABLES `problemas` WRITE;
 /*!40000 ALTER TABLE `problemas` DISABLE KEYS */;
+INSERT INTO `problemas` VALUES (1,'problema 1',5,1,1,1),(2,'problema 2',3,1,1,1);
 /*!40000 ALTER TABLE `problemas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +217,7 @@ CREATE TABLE `tecnicos` (
 
 LOCK TABLES `tecnicos` WRITE;
 /*!40000 ALTER TABLE `tecnicos` DISABLE KEYS */;
-INSERT INTO `tecnicos` VALUES (1,'Altamirano','27 de Abril 443','Miguel','65456654','514-645665','eMail'),(3,'Flores','Amelia Stocklin 5934','Yohana','43544543','514-645665','Whatsapp'),(4,'Flores','Amelia Stocklin 5934','Yohana','43544543','514-645665','Whatsapp'),(5,'Flores','Amelia Stocklin 5934','Yohana','43544543','514-645665','Whatsapp');
+INSERT INTO `tecnicos` VALUES (1,'Altamirano','27 de Abril 443','Miguel','65456654','514-645665','eMail'),(3,'Flores','Oncativo 5934','Yohana','43544543','514-645656','Whatsapp'),(4,'Perez','San Martin 5934','Daniel','43544543','514-645665','Whatsapp'),(5,'Dominguez','Amelia Stocklin 5934','Marcela','43544543','514-645665','Whatsapp');
 /*!40000 ALTER TABLE `tecnicos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -229,4 +230,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-27  0:38:20
+-- Dump completed on 2023-11-28  2:45:06
