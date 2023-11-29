@@ -26,7 +26,7 @@ public class ClienteDAO {
 		sesion.persist(cliente);
 		sesion.getTransaction().commit();
 		cerrarSesion();
-		return "Persona Técnica agregada satisfactoriamente\n-------------\n";
+		return "Cliente agregado satisfactoriamente\n-------------\n";
 	} catch (Exception e) {
 		e.printStackTrace();
 	}	
@@ -49,7 +49,7 @@ public class ClienteDAO {
 		return "Error al intentar eliminar el cliente en la base de datos";
 	}
 		
-	//-------------------MODIFICACION----------------------
+//-------------------MODIFICACION----------------------
 	public String modificarCliente(int id,String nombre, String apellido,String documento, String direccion, String telefono){
 		iniciarSesion();
 	try {	
@@ -122,6 +122,5 @@ public class ClienteDAO {
 		sesion.close();
 		sesionAbierta.close();
 	}
-
 }
 

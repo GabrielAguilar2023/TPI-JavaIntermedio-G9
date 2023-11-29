@@ -8,6 +8,6 @@ public class Area_Comercial {
 		System.out.println("Funcionalidad desde Area Comercial");
 		
 		ClienteDAO cliente1 = new ClienteDAO();
-		System.out.println( cliente1.crearCliente("Tiendas VESTA", "Bedoya 879", "45353655"));	
+		System.out.println( cliente1.crearCliente("Libreria 'La Esquina'", "Bedoya 895", "45353456"));	
 	}
 }

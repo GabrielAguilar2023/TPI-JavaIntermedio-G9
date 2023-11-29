@@ -20,12 +20,10 @@ public class ServicioContratadoDAO {
 		session.persist(s);
 		session.getTransaction().commit();
 		sessionFactory.close();
-		return "Cliente agregado satisfactoriamente\n-------------\n";
+		return "Servicio agregado satisfactoriamente\n-------------\n";
 	} catch (Exception e) {
 		e.printStackTrace();
 	}	
-		return "Error al intentar agregar el cliente en la base de datos";
+		return "Error al intentar agregar el Servicio en la base de datos";
 	}
-	
-	
 }

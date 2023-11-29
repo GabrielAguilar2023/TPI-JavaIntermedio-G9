@@ -68,7 +68,7 @@ public class RRHHControlador {
 	    	Date inicioPeriodo = sumarRestarHorasFecha(finPeriodo, n * (-24));
 	    	
 	    	IncidenteDAO incidente = new IncidenteDAO();
-	    	List<Incidente> listado = incidente.fitrarIncidente2(inicioPeriodo,finPeriodo);
+	    	List<Incidente> listado = incidente.fitrarIncidentePeriodo(inicioPeriodo,finPeriodo);
 	    	listado.stream().forEach(e->System.out.println("Id del Incidente -> "+ e.getIdIncidente()+ " --> "+
 	    			e.getFechaSolucionReal() +
 	    			"-> "+ e.calularTiempoResolucion()+" hs" +" --> Tecnico Nº "+

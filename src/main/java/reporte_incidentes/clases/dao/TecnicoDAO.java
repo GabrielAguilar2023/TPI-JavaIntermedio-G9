@@ -9,7 +9,7 @@ import org.hibernate.cfg.Configuration;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
-import reporte_incidentes.clases.modelo.PersonaTecnica;
+
 import reporte_incidentes.clases.modelo.Tecnico;
 
 public class TecnicoDAO {
@@ -21,7 +21,6 @@ public class TecnicoDAO {
 		iniciarSesion ();
 	try {
 		Tecnico tecnico = new Tecnico(nombre,apellido,documento,direccion,telefono,notificacion);
-
 		sesion.beginTransaction();
 		sesion.persist(tecnico);
 		sesion.getTransaction().commit();
@@ -33,8 +32,7 @@ public class TecnicoDAO {
 		e.printStackTrace();
 		System.out.println( "Error al intentar agregar el técnico en la base de datos");
 		return null;
-	}	
-	
+	}		
 	}
 	
 //-----------------BAJA-------------------
@@ -53,7 +51,7 @@ public class TecnicoDAO {
 		return "Error al intentar eliminar el técnico en la base de datos";
 	}
 		
-	//-------------------MODIFICACION----------------------
+//-------------------MODIFICACION----------------------
 	public String modificarTecnico(int id,String nombre, String apellido,String documento, String direccion, String telefono,String notificacion){
 		iniciarSesion();
 	try {	
@@ -118,7 +116,6 @@ public class TecnicoDAO {
 		System.out.println("Valor = '" + valor + "' NO ENCONTRADO en la columna '"+campo+"' de la tabla Técnicos");
 		return null;
 	}
-	
 	}
 
 	public void iniciarSesion () {

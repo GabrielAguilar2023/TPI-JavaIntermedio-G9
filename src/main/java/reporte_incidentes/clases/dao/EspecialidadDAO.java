@@ -30,14 +30,13 @@ public class EspecialidadDAO {
 		sesion.persist(especialidad);
 		sesion.getTransaction().commit();
 		cerrarSesion();
-		return "Persona Técnica agregada satisfactoriamente\n-------------\n";
+		return "Especialidad agregada satisfactoriamente\n-------------\n";
 	} catch (Exception e) {
 		e.printStackTrace();
 	}	
-		return "Error al intentar agregar el cliente en la base de datos";
-	}
+		return "Error al intentar agregar Especialidad en la base de datos";
+}
 	
-
 
 	public void iniciarSesion () {
 		sesionAbierta= (SessionFactory) new Configuration().configure().addAnnotatedClass(Cliente.class).buildSessionFactory();
@@ -48,5 +47,4 @@ public class EspecialidadDAO {
 		sesion.close();
 		sesionAbierta.close();
 	}
-
 }

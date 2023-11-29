@@ -23,8 +23,6 @@ public class RRHH {
     	
 		RRHHControlador tecnicoRRHH = new RRHHControlador();
     		
-		// persona1.fitrarTecnico("apellido","Flores");
-    		
     			System.out.println("\nElija una opcion:\n"
     					+ "1 --> Agregar un Técnico\n"
     					+ "2 --> Quién fue el técnico que más rápido resolvió los incidentes \n"
