@@ -1,4 +1,4 @@
-package reporte_incidentes.clases.controlador;
+package reporte_incidentes.clases.dao;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.hibernate.cfg.Configuration;
 import reporte_incidentes.clases.modelo.Cliente;
 import reporte_incidentes.clases.modelo.ServicioContratado;
 
-public class ServicioContratadoControlador {
+public class ServicioContratadoDAO {
 
 	public String CrearServicioContratado(ServicioContratado s){
 		SessionFactory sessionFactory = (SessionFactory) new Configuration().configure().addAnnotatedClass(Cliente.class).buildSessionFactory();
@@ -20,12 +20,10 @@ public class ServicioContratadoControlador {
 		session.persist(s);
 		session.getTransaction().commit();
 		sessionFactory.close();
-		return "Cliente agregado satisfactoriamente\n-------------\n";
+		return "Servicio agregado satisfactoriamente\n-------------\n";
 	} catch (Exception e) {
 		e.printStackTrace();
 	}	
-		return "Error al intentar agregar el cliente en la base de datos";
+		return "Error al intentar agregar el Servicio en la base de datos";
 	}
-	
-	
 }

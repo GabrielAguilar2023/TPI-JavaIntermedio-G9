@@ -1,13 +1,13 @@
 package reporte_incidentes.ejecutables;
 
-import reporte_incidentes.clases.controlador.ClienteControlador;
+import reporte_incidentes.clases.dao.ClienteDAO;
 
 public class Area_Comercial {
 
 	public static void main(String[] args) {
 		System.out.println("Funcionalidad desde Area Comercial");
 		
-		ClienteControlador cliente1 = new ClienteControlador();
-		System.out.println( cliente1.crearCliente("Tiendas VESTA", "Bedoya 879", "45353655"));	
+		ClienteDAO cliente1 = new ClienteDAO();
+		System.out.println( cliente1.crearCliente("Libreria 'La Esquina'", "Bedoya 895", "45353456"));	
 	}
 }

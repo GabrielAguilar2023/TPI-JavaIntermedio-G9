@@ -1,6 +1,4 @@
-package reporte_incidentes.clases.controlador;
-
-
+package reporte_incidentes.clases.dao;
 
 import java.util.List;
 
@@ -13,11 +11,10 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import reporte_incidentes.clases.modelo.Cliente;
 
-public class ClienteControlador {
+public class ClienteDAO {
 	
 	private SessionFactory sesionAbierta;	
-	private Session sesion;
-		
+	private Session sesion;		
 	
 //--------------ALTA--------------------	
 	public String crearCliente(String razonSocial,String direccion, String telefono){
@@ -29,7 +26,7 @@ public class ClienteControlador {
 		sesion.persist(cliente);
 		sesion.getTransaction().commit();
 		cerrarSesion();
-		return "Persona Técnica agregada satisfactoriamente\n-------------\n";
+		return "Cliente agregado satisfactoriamente\n-------------\n";
 	} catch (Exception e) {
 		e.printStackTrace();
 	}	
@@ -52,7 +49,7 @@ public class ClienteControlador {
 		return "Error al intentar eliminar el cliente en la base de datos";
 	}
 		
-	//-------------------MODIFICACION----------------------
+//-------------------MODIFICACION----------------------
 	public String modificarCliente(int id,String nombre, String apellido,String documento, String direccion, String telefono){
 		iniciarSesion();
 	try {	
@@ -61,7 +58,6 @@ public class ClienteControlador {
 		cliente.setRazonSocial(nombre);
 		cliente.setDireccion(direccion);
 		cliente.setTelefono(telefono);
-		
 
 		sesion.persist(cliente);
 		sesion.getTransaction().commit();
@@ -126,6 +122,5 @@ public class ClienteControlador {
 		sesion.close();
 		sesionAbierta.close();
 	}
-
 }
 

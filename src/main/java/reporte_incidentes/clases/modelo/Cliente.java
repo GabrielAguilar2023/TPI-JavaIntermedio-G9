@@ -14,6 +14,7 @@ public class Cliente {
 
 	private String razonSocial;
 	private String direccion;
+	@Column(name="Telefono", length = 20)
 	private String telefono;
 			
 	@OneToMany (mappedBy = "cliente")
@@ -24,6 +25,4 @@ public class Cliente {
 		this.direccion = direccion;
 		this.telefono = telefono;
 	}
-	
-
 }

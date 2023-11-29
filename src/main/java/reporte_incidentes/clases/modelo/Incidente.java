@@ -17,10 +17,15 @@ public class Incidente {
 	@Id @GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int idIncidente;
 	
-	private Date fechaInicioTramite;	
+// Fecha en que se denuncia el incidente
+	private Date fechaInicioTramite;
+
 	private String descripcionProblema;
+// Fecha estimada de resolucion informada el cliente.	
 	private Date fechaSolucionEstimada;
+// Fecha en que se solucionó el incidente por parte del técnico	
 	private Date fechaSolucionReal;
+
 	private String informeTecnico;
 	@Column(columnDefinition = "BIT(1) NOT NULL DEFAULT FALSE")
 	private boolean resuelto;

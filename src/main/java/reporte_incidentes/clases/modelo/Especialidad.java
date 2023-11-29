@@ -18,7 +18,7 @@ public class Especialidad {
 	@OneToMany(mappedBy = "especialidad")
 	private List<Problema> problemas;
 	
-	@ManyToOne
+	@ManyToOne (cascade = CascadeType.REMOVE)
 	@JoinColumn(name="idTecnico", nullable=false)
 	private Tecnico tecnico;
 

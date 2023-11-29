@@ -1,4 +1,4 @@
-package reporte_incidentes.clases.controlador;
+package reporte_incidentes.clases.dao;
 
 import java.util.Date;
 import java.util.List;
@@ -13,7 +13,7 @@ import jakarta.persistence.criteria.Root;
 import reporte_incidentes.clases.modelo.Cliente;
 import reporte_incidentes.clases.modelo.Incidente;
 
-public class IncidenteControlador {
+public class IncidenteDAO {
 	private SessionFactory sesionAbierta;	
 	private Session sesion;
 	
@@ -34,17 +34,7 @@ public class IncidenteControlador {
 		}	
 			return null;
 	}
-		
-	public void iniciarSesion () {
-			sesionAbierta= (SessionFactory) new Configuration().configure().addAnnotatedClass(Incidente.class).buildSessionFactory();
-			this.sesion = sesionAbierta.openSession();
-	}
-		
-	public void cerrarSesion () {
-			sesion.close();
-			sesionAbierta.close();
-		}
-		
+				
 //---------------LEER-----------------------
 	public Incidente leerIncidente(int id){
 			iniciarSesion ();
@@ -89,13 +79,13 @@ public class IncidenteControlador {
 	}
 		
 //---------FILTRADO POR INTERVALO DE FECHAS----------------------
-		public List<Incidente> fitrarIncidente2(Date inicio, Date fin){		
+		public List<Incidente> fitrarIncidentePeriodo(Date inicio, Date fin){		
 			iniciarSesion();
 			try {
 				sesion.beginTransaction();
 				CriteriaBuilder cb = sesion.getCriteriaBuilder();		
 				CriteriaQuery<Incidente> cq = cb.createQuery(Incidente.class);
-				// SELECT * FROM PersonaTecnica
+				// SELECT * FROM Incidente
 				Root<Incidente> root = cq.from(Incidente.class); 
 				
 				//WHERE campo = "valorBuscado"
@@ -110,5 +100,15 @@ public class IncidenteControlador {
 				e.printStackTrace();
 				return null;		
 			}
-		}	
+		}
+		
+	public void iniciarSesion () {
+			sesionAbierta= (SessionFactory) new Configuration().configure().addAnnotatedClass(Incidente.class).buildSessionFactory();
+			this.sesion = sesionAbierta.openSession();
+	}
+		
+	public void cerrarSesion () {
+			sesion.close();
+			sesionAbierta.close();
+		}
 }
