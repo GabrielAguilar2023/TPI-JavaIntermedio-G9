@@ -15,5 +15,8 @@ En el presente trabajo se realizó el desarrollo de un sistema que permite el se
 
 ## Modelado de datos
 
-![der](assets/der.jpg)
+![der](assets/DER.png)
 
+## Modelado de clases
+
+![der](assets/DiagramaClases.png)
